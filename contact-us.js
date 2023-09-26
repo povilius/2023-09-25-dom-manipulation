@@ -255,26 +255,20 @@
 
 let content = document.querySelector('#content')
 
-let container = document.createElement('div')
-container.classList.add('container')
+let container = createElement('container')
 content.append(container)
 
-let contentWrapper = document.createElement('div')
-contentWrapper.classList.add('content-wrapper')
+let contentWrapper = createElement('content-wrapper')
 container.append(contentWrapper)
 
-let shopsWrapper = document.createElement('div')
-shopsWrapper.classList.add('shops-wrapper')
-
+let shopsWrapper = createElement('shops-wrapper')
 let mapWrapper = createMapElement()
+
 contentWrapper.append(shopsWrapper, mapWrapper)
 
-let shopsSectionTitle = document.createElement('h2')
-shopsSectionTitle.classList.add('section-title')
-shopsSectionTitle.textContent = 'Find us'
+let shopsSectionTitle = createElement('section-title', 'h2', 'Find us')
+let shopsList = createElement('shops-list')
 
-let shopsList = document.createElement('div')
-shopsList.classList.add('shops-list')
 shopsWrapper.append(shopsSectionTitle, shopsList)
 
 let shopItem1 = createShopItem(
@@ -330,15 +324,10 @@ let shopItem5 = createShopItem(
 shopsList.append(shopItem1, shopItem2, shopItem3, shopItem4, shopItem5)
 
 function createShopItem(title, shopPhone, shopEmail, shopAddress, phoneLink, emailLink, addressLink) {
-  let shopItem = document.createElement('div')
-  shopItem.classList.add('shop-item')
+  let shopItem = createElement('shop-item')
   
-  let shopTitle = document.createElement('h3')
-  shopTitle.classList.add('shop-title')
-  shopTitle.textContent = title
-  
-  let shopContactsList = document.createElement('ul')
-  shopContactsList.classList.add('shop-contacts-list')
+  let shopTitle = createElement('shop-title', 'h3', title)
+  let shopContactsList = createElement('shop-contacts-list', 'ul')
   
   shopItem.append(shopTitle, shopContactsList)
 
@@ -352,12 +341,8 @@ function createShopItem(title, shopPhone, shopEmail, shopAddress, phoneLink, ema
 }
 
 function createShopContactsItem(title, linkText, link = '#', linkTarget = '_self') {
-  let shopContactItem = document.createElement('li')
-  shopContactItem.classList.add('shop-contacts-item')
-
-  let titleElement = document.createElement('span')
-  titleElement.classList.add('shop-contacts-item-title')
-  titleElement.textContent = title
+  let shopContactItem = createElement('shop-contacts-item', 'li')
+  let titleElement = createElement('shop-contacts-item-title', 'span', title)
 
   let linkElement = document.createElement('a')
   linkElement.textContent = linkText
@@ -370,8 +355,7 @@ function createShopContactsItem(title, linkText, link = '#', linkTarget = '_self
 }
 
 function createMapElement() {
-  let mapWrapper = document.createElement('div')
-  mapWrapper.classList.add('map-wrapper')
+  let mapWrapper = createElement('map-wrapper')
 
   // mapWrapper.innerHTML = `<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d194441.91156701514!2d23.89974517269703!3d54.83160015047921!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46e72270b167d343%3A0x614bd1e0c7378bbc!2sKaunas%2C%20Kaunas%20City%20Municipality!5e0!3m2!1sen!2slt!4v1693322492806!5m2!1sen!2slt" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`
 
@@ -387,4 +371,14 @@ function createMapElement() {
   mapWrapper.append(mapIframe)
 
   return mapWrapper
+}
+
+function createElement(className, tag = 'div', text = '') {
+  let element = document.createElement(tag)
+  if (className) {
+    element.classList.add(className)
+  }
+  element.textContent = text
+
+  return element
 }
